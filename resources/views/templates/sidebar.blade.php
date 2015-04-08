@@ -19,6 +19,7 @@
     </a>
     <div id="cadastros" class="collapse submenu">
         <div class="panel list-group">
+            {{--Clientes--}}
             <a href="#" class="list-group-item" data-toggle="collapse" data-target="#clientes" data-parent="#cadastros">
                 <i class="fa fa-suitcase"></i>
                 Clientes
@@ -27,13 +28,14 @@
                 <a href="#" class="list-group-item">Lista todos</a>
                 <a href="#" class="list-group-item">Novo</a>
             </div>
+            {{--Usuarios--}}
             <a class="list-group-item" data-toggle="collapse" data-target="#usuarios" data-parent="#cadastros">
                 <i class="fa fa-users"></i>
                 Usuários
             </a>
             <div class="collapse" id="usuarios">
-                <a href="#" class="list-group-item">Lista todos</a>
-                <a href="#" class="list-group-item">Novo</a>
+                <a href="{{ URL::to('usuarios') }}" class="list-group-item">Lista todos</a>
+                <a href="{{ URL::to('usuarios/novo') }}" class="list-group-item">Novo</a>
             </div>
         </div>
     </div>

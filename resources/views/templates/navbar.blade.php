@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div id="logo" class="col-xs-12 col-md-2">
-            <a href="#"><img src="img/grafix-logo-50.png"> Grafix <sup>v0.0.2</sup></a>
+            <a href="#"><img src="{!! URL::asset('img/grafix-logo-50.png') !!}"> Grafix <sup>v0.0.2</sup></a>
         </div>
         <div id="top-panel" class="col-xs-12 col-md-10">
             <div class="row">
@@ -16,7 +16,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle account" data-toggle="dropdown">
                                 <div class="avatar">
-                                    <img src="img/grafix-logo-50.png" class="img-circle">
+                                    <img src="{!! URL::asset('img/johndoe.png') !!}" class="img-circle">
                                 </div>
                                 <i class="fa fa-angle-down pull-right"></i>
                                 <div class="user-mini pull-right">

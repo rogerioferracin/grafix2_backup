@@ -10,6 +10,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	use Authenticatable, CanResetPassword;
 
+	//Relations ------------------------------------------------------------------------------
+	public function contatos()
+	{
+		return $this->morphOne('Contato', 'contato_morph');
+	}
+
+	//Validação ------------------------------------------------------------------------------
+	public static $rules = array(
+		'username' => 'required',
+		'email' => 'required|email',
+		'password' => 'required|confirmed'
+	);
+
+    public static $messages = array(
+        'password.required' => 'O campo <b>senha</b> deve ser preenchido',
+        'password.confirmed' => 'O <b>confirma senha</b> não coincide.'
+    );
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -22,7 +40,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password'];
+	protected $fillable = ['username', 'email', 'password'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
