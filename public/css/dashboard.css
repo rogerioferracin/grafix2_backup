@@ -349,7 +349,7 @@ body {
     -moz-border-radius: 0;
     border-radius: 0;
     border-bottom:1px solid #242424;
-    z-index: 2000;
+    z-index: 1040;
 }
 
 .nav-sidebar {

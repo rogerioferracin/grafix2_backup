@@ -3,6 +3,13 @@
  */
 
 /**
+ * Load Bootbox
+ */
+function MakeSubmitConfirm(form) {
+
+}
+
+/**
  * Load Datatables
  */
 function MakeDataTable(tableId, options)
@@ -38,9 +45,40 @@ function MakeDataTable(tableId, options)
 
 }
 
+
 /** *******************************************************************************************************************
  * Document ready load
  */
 $(document).ready(function(){
+    //tooltip ----------------------------------------
+    $('[data-toggle="tooltip"]').tooltip();
 
+    //confirm submit -----------------------------------
+    $('.submit-confirm').click(function(e){
+        e.preventDefault();
+        var form = $(this).closest('form');
+
+        $.getScript('/plugins/bootbox/bootbox.min.js').done(function(script){
+            bootbox.setDefaults({
+                locale : 'br',
+                size : 'small'
+            });
+
+            bootbox.dialog({
+                title   : 'Confirma envio?',
+                message : 'Confirma envio de formulário',
+                buttons : {
+                    default : {
+                        label : 'Cancela'
+                    },
+                    primary : {
+                        label : 'Ok',
+                        callback : function() {
+                            form.submit();
+                        }
+                    }
+                }
+            });
+        });
+    })
 })
