@@ -49,4 +49,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    /** ***************************************************************************************************************
+     * Valida Usuario
+     */
+    public static function validaUsuario($input) {
+        $validator = \Validator::make($input, User::$rules, User::$messages);
+
+        return $validator;
+    }
+
 }

@@ -515,3 +515,15 @@ body {
 .panel-danger > .panel-footer + .panel-collapse > .panel-body {
     border-bottom-color: #ebccd1;
 }
+
+/*
+* TABLES STYLES
+*/
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #eaebff;
+}
+
+.table > tbody > tr > td:hover {
+    background-color: #e0e1ff;
+    cursor: pointer;
+}

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div id="logo" class="col-xs-12 col-md-2">
-            <a href="#"><img src="{!! URL::asset('img/grafix-logo-50.png') !!}"> Grafix <sup>v0.0.2</sup></a>
+            <a href="{!! URL::to('/') !!}"><img src="{!! URL::asset('img/grafix-logo-50.png') !!}"> Grafix <sup>v0.0.2</sup></a>
         </div>
         <div id="top-panel" class="col-xs-12 col-md-10">
             <div class="row">

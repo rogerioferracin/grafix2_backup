@@ -17,8 +17,9 @@
     <link href="{{ URL::asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
     <!--Plugins css-->
-    <!--<link href="plugins/datatables/jquery.dataTables.min.css" rel="stylesheet">-->
     <link href="{{ URL::asset('plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
 
 
     <!-- Custom styles for this template -->
@@ -44,7 +45,7 @@
         <!-- SIDEBAR ----------------------------------------------------------------------------------------------- -->
         <div class="col-sm-3 col-md-2 sidebar">
             <div id="sidemenu">
-                @include('templates.sidebar')
+                @include('templates.sidebar-main')
             </div>
         </div>
         <!-- BREADCRUMB -------------------------------------------------------------------------------------------- -->
@@ -52,8 +53,6 @@
             <div id="breadcrumb" class="row">
                 <ol class="breadcrumb">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Clientes</a></li>
-                    <li><a href="#">Novo</a></li>
                 </ol>
             </div>
         </div>
@@ -95,6 +94,8 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="{{ URL::asset('plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ URL::asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::render() !!}
 
 <!--Load js for page-->
 <script src="{{ URL::asset('js/dashboard.js') }}"></script>

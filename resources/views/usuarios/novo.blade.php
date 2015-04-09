@@ -54,7 +54,7 @@
                         {!! Form::label('nome', 'Nome*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
                             {!! Form::text('nome', null, array('class'=>'form-control')) !!}
-                            @if($errors->has('nome')) <span class="text-danger small"> {!! $errors->first('password') !!} </span> @endif
+                            @if($errors->has('nome')) <span class="text-danger small"> {!! $errors->first('nome') !!} </span> @endif
                         </div>
                         {!! Form::label('sobrenome', 'Sobrenome', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
@@ -72,10 +72,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        {!! Form::label('telefone', 'Telefone', array('class'=>'col-md-2 control-label')) !!}
-                            @if($errors->has('telefone')) <span class="text-danger small"> {!! $errors->first('telefone') !!} </span> @endif
+                        {!! Form::label('telefone', 'Telefone*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
                             {!! Form::text('telefone', null, array('class'=>'form-control')) !!}
+                            @if($errors->has('telefone')) <span class="text-danger small"> {!! $errors->first('telefone') !!} </span> @endif
                         </div>
                         {!! Form::label('celular', 'Celular', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
@@ -105,11 +105,16 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <a href="#endereco" data-toggle="collapse" data-parent="#accordion">
-                    <span class="panel-title">Endereço</span>
+                    <span class="panel-title">Endereço</span> <span class="badge-errors"></span>
                 </a>
             </div>
             <div class="panel-collapse collapse" id="endereco">
                 <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-12 clearfix text-right">
+                            <button class="btn btn-default btn-sm" id="btn-busca-endereco" type="button"><i class="fa fa-search"></i> Busca endereço</button>
+                        </div>
+                    </div>
                     <div class="form-group">
                         {!! Form::label('logradouro', 'Logradouro*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-6">
@@ -143,16 +148,11 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('cep', 'CEP', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                {!! Form::text('cep', null, array('class'=>'form-control')) !!}
-                                <div class="input-group-btn">
-                                    <button class="btn" type="button"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
+                        <div class="col-md-2">
+                            {!! Form::text('cep', null, array('class'=>'form-control')) !!}
                         </div>
                         {!! Form::label('referencia', 'Referência', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             {!! Form::text('referencia', null, array('class'=>'form-control')) !!}
                         </div>
                     </div>
@@ -167,10 +167,29 @@
         {!! Form::submit('Cadastrar', array('class'=>'btn btn-primary pull-right submit-confirm')) !!}
     </div>
 
+    <div class="modal fade">
+
+    </div>
+
     {!! Form::close() !!}
 @stop
 
 
 @section('sidebar')
     @include('usuarios.sidebar')
+@stop
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            var panels = $('.panel-group').find('.panel-body');
+            $(panels).each(function(){
+                var errors = $(this).find('.text-danger');
+                if(errors.length > 0) {
+                    $(errors).closest('.panel-body').parent().siblings().append('<span class="badge">' + errors.length + '</div>');
+//                    $(errors).parent().siblings().find('.badge-errors').append('<span class="badge"> sss' + errors.length + '</div>');
+                }
+            });
+        })
+    </script>
 @stop

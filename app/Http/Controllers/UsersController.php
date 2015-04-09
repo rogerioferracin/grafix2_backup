@@ -1,6 +1,8 @@
 <?php namespace Grafix\Http\Controllers;
 
 use Grafix\User;
+use Grafix\Contato;
+use Grafix\Endereco;
 
 class UsersController extends Controller
 {
@@ -41,13 +43,23 @@ class UsersController extends Controller
      */
     public function postNovo()
     {
-        $validator = \Validator::make(\Input::all(), User::$rules, User::$messages);
+        $validaUser = User::validaUsuario(\Input::all());
+        $validaContato = Contato::validaContato(\Input::all());
+        $validaEndereco = Endereco::validaEndereco(\Input::all());
 
-        if($validator->fails()){
+        if($validaUser->fails() || $validaEndereco->fails() || $validaContato){
+            \Toastr::warning('Ocorreu uma falha ao validar o cadastro!', 'Atenção');
             return \Redirect::back()
-                ->withErrors($validator)
+                ->withErrors(array_merge_recursive(
+                    $validaUser->messages()->toArray(),
+                    $validaContato->messages()->toArray(),
+                    $validaEndereco->messages()->toArray()
+                ))
                 ->withInput();
         }
 
+        //TODO Terminar cadastro
+
     }
+
 }

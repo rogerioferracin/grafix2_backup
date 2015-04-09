@@ -1,7 +1,6 @@
-<?php namespace app\Models;
+<?php namespace Grafix;
 
 use Illuminate\Database\Eloquent\Model;
-
 
 class Contato extends Model {
 
@@ -27,5 +26,15 @@ class Contato extends Model {
     //Fillable -------------------------------------------------------------------------------
     protected $fillable = array('nome', 'sobrenome', 'cargo', 'setor', 'telefone',
         'celular', 'email', 'skype', 'observacoes', 'contato_principal', 'aniversario', 'lembrar_aniversario');
+
+
+    /** ***************************************************************************************************************
+     * Valida contato
+     */
+    public static function validaContato($input)
+    {
+        $validator = \Validator::make($input, Contato::$rules);
+        return $validator;
+    }
 
 }
