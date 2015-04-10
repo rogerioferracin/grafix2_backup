@@ -4,6 +4,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Endereco extends Model {
 
+    //protected ------------------------------------------------------------------------------
+    protected $table = 'enderecos';
+
+    protected $fillable = array('logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'uf', 'cep', 'referencia');
+
+    //Relations ------------------------------------------------------------------------------
+    public function endereco_morph()
+    {
+        return $this->morphTo();
+    }
+
 	//
     public static $rules = array(
         'logradouro' => 'required',

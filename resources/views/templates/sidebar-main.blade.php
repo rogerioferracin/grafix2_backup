@@ -1,4 +1,4 @@
-<div class="panel list-group nav-sidebar">
+<div class="panel list-group nav-sidebar hidden-print">
     <a href="#" class="list-group-item">
         <i class="fa fa-home"></i> <span>Home</span>
     </a>

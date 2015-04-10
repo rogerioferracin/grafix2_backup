@@ -135,8 +135,8 @@ function MakeDataTable(tableId, options)
     //Load dynamic datatable plugin
     function LoadDatatablePlugin() {
         $.getScript('/plugins/datatables/jquery.dataTables.min.js', function(){
-            $.getScript('/plugins/datatables/dataTables.tableTools.min.js', function(){
-                $.getScript('/plugins/datatables/dataTables.bootstrap.min.js', createDataTable())
+            $.getScript('/plugins/datatables/dataTables.bootstrap.min.js', function(){
+                $.getScript('/plugins/datatables/dataTables.tableTools.min.js', createDataTable())
             })
         })
     }
@@ -148,8 +148,9 @@ function MakeDataTable(tableId, options)
             language : {
                 url : '/plugins/datatables/pt-br.json'
             },
-            dom :   "<'dom-content'<'col-sm-6'l><'col-sm-6'f><'clearfix'>>rt<'dom-content'<'col-sm-6'i><'col-sm-6'p>>"
+            dom :   "<'dom-content'<'col-sm-6'l><'col-sm-6'f><'clearfix'>>rt<'dom-content'<'col-sm-6 small'i><'col-sm-6 small'p>>"
         })
+
         //load datatable
         var oTable = $(tableId).dataTable(options);
 

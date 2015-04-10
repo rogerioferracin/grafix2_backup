@@ -11,7 +11,8 @@
 |
 */
 
-//Route::get('/', 'WelcomeController@index');
+Route::get('login', 'WelcomeController@index');
+Route::get('logout', 'WelcomeController@index');
 
 Route::get('/', 'HomeController@index');
 
