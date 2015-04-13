@@ -9,16 +9,21 @@
                 <th>Email</th>
                 <th>Telefone</th>
                 <th>Grupo</th>
+                <th><i class="fa fa-edit" data-toggle="tooltip" title="Opções para usuário"></i> </th>
             </tr>
         </thead>
         <tbody>
             @foreach($users as $user)
             <tr>
-                <td>{{ $user->name }}</td>
-                <td>ferracin</td>
-                <td>ferracin@email.com</td>
-                <td>(12) 98854-2458</td>
-                <td>Usuario</td>
+                <td>{{ $user->contato->nome }}</td>
+                <td>{{ $user->username }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->contato->telefone }}</td>
+                <td>{{ $user->grupo }}</td>
+                <td>
+                    <a href="{!! url('usuarios/atualiza', ['id'=>$user->id]) !!}"><i class="fa fa-folder-open" data-toggle="tooltip" title="Atualiza usuário"></i> </a> |
+                    <a href="{!! url('usuarios/ficha', ['id'=>$user->id]) !!}"><i class="fa fa-list" data-toggle="tooltip" title="Ficha de usuário"></i> </a>
+                </td>
             </tr>
             @endforeach
         </tbody>

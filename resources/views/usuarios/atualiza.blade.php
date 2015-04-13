@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('content')
-    {!! Form::open(array('url'=>'usuarios/novo', 'class'=>'form-horizontal')) !!}
+    {!! Form::model($user, array('url'=>['usuarios/atualiza', 'id'=>$user->id], 'class'=>'form-horizontal', 'method'=>'put')) !!}
     <div class="panel-group" id="accordion">
         {{--PANEL DADOS ------------------------------------------------------- --}}
         <div class="panel panel-default">
@@ -15,38 +15,25 @@
                     <div class="form-group">
                         {!! Form::label('username', 'Usuário*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('username', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('username', $user->username, array('class'=>'form-control')) !!}
                             @if($errors->has('username')) <span class="text-danger small"> {!! $errors->first('username') !!} </span> @endif
                         </div>
 
                         {!! Form::label('email', 'Email*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('email', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('email', $user->email, array('class'=>'form-control')) !!}
                             @if($errors->has('email')) <span class="text-danger small"> {!! $errors->first('email') !!} </span> @endif
                         </div>
                     </div>
                     <div class="form-group">
                         {!! Form::label('grupo', 'Grupo*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::select('grupo', $grupos ,null, array('class'=>'form-control')) !!}
+                            {!! Form::select('grupo', $grupos ,$user->grupo, array('class'=>'form-control')) !!}
                             @if($errors->has('grupo')) <span class="text-danger small"> {!! $errors->first('grupo') !!} </span> @endif
                         </div>
                         {!! Form::label('dica_senha', 'Dica da senha', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('dica_senha', null, array('class'=>'form-control')) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('password', 'Senha*', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            {!! Form::password('password', array('class'=>'form-control')) !!}
-                            @if($errors->has('password')) <span class="text-danger small"> {!! $errors->first('password') !!} </span> @endif
-                        </div>
-
-                        {!! Form::label('password_confirmation', 'Confirma senha*', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            {!! Form::password('password_confirmation', array('class'=>'form-control')) !!}
-                            @if($errors->has('password_confirmation')) <span class="text-danger small"> {!! $errors->first('password_confirmation') !!} </span> @endif
+                            {!! Form::text('dica_senha', $user->dica_senha, array('class'=>'form-control')) !!}
                         </div>
                     </div>
                 </div>
@@ -64,49 +51,49 @@
                     <div class="form-group">
                         {!! Form::label('nome', 'Nome*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('nome', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('nome', $user->contato->nome, array('class'=>'form-control')) !!}
                             @if($errors->has('nome')) <span class="text-danger small"> {!! $errors->first('nome') !!} </span> @endif
                         </div>
                         {!! Form::label('sobrenome', 'Sobrenome', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('sobrenome', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('sobrenome', $user->contato->sobrenome, array('class'=>'form-control')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         {!! Form::label('cargo', 'Cargo', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('cargo', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('cargo', $user->contato->cargo, array('class'=>'form-control')) !!}
                         </div>
                         {!! Form::label('setor', 'Setor', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('setor', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('setor', $user->contato->setor, array('class'=>'form-control')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         {!! Form::label('telefone', 'Telefone*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('telefone', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('telefone', $user->contato->telefone, array('class'=>'form-control')) !!}
                             @if($errors->has('telefone')) <span class="text-danger small"> {!! $errors->first('telefone') !!} </span> @endif
                         </div>
                         {!! Form::label('celular', 'Celular', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('celular', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('celular', $user->contato->celular, array('class'=>'form-control')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         {!! Form::label('skype', 'Skype', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('skype', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('skype', $user->contato->skype, array('class'=>'form-control')) !!}
                         </div>
                         {!! Form::label('aniversario', 'Aniversário', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('aniversario', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('aniversario', $user->contato->aniversario, array('class'=>'form-control')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         {!! Form::label('observacoes', 'Observações', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-10">
-                            {!! Form::textarea('observacoes', null, array('class'=>'form-control', 'rows'=>'3')) !!}
+                            {!! Form::textarea('observacoes', $user->contato->observacoes, array('class'=>'form-control', 'rows'=>'3')) !!}
                         </div>
                     </div>
                 </div>
@@ -129,42 +116,42 @@
                     <div class="form-group">
                         {!! Form::label('logradouro', 'Logradouro*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-6">
-                            {!! Form::text('logradouro', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('logradouro', $user->endereco->logradouro, array('class'=>'form-control')) !!}
                             @if($errors->has('logradouro')) <span class="text-danger small"> {!! $errors->first('logradouro') !!} </span> @endif
                         </div>
                         {!! Form::label('numero', 'Número', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-2">
-                            {!! Form::text('numero', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('numero', $user->endereco->numero, array('class'=>'form-control')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         {!! Form::label('complemento', 'Complemento*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('complemento', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('complemento', $user->endereco->complemento, array('class'=>'form-control')) !!}
                         </div>
                         {!! Form::label('bairro', 'Bairro', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('bairro', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('bairro', $user->endereco->bairro, array('class'=>'form-control')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         {!! Form::label('cidade', 'Cidade', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
-                            {!! Form::text('cidade', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('cidade', $user->endereco->cidade, array('class'=>'form-control')) !!}
                         </div>
                         {!! Form::label('uf', 'UF', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-2">
-                            {!! Form::text('uf', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('uf', $user->endereco->uf, array('class'=>'form-control')) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         {!! Form::label('cep', 'CEP', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-2">
-                            {!! Form::text('cep', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('cep', $user->endereco->cep, array('class'=>'form-control')) !!}
                         </div>
                         {!! Form::label('referencia', 'Referência', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-6">
-                            {!! Form::text('referencia', null, array('class'=>'form-control')) !!}
+                            {!! Form::text('referencia', $user->endereco->referencia, array('class'=>'form-control')) !!}
                         </div>
                     </div>
                 </div>

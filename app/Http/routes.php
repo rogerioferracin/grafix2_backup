@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('login', 'WelcomeController@index');
+Route::get('logout', 'WelcomeController@index');
 
-Route::get('home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -21,3 +22,4 @@ Route::controllers([
 ]);
 
 Route::controller('usuarios', 'UsersController');
+Route::controller('enderecos', 'EnderecosController');

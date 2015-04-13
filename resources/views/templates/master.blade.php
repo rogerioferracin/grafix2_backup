@@ -17,8 +17,9 @@
     <link href="{{ URL::asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
     <!--Plugins css-->
-    <!--<link href="plugins/datatables/jquery.dataTables.min.css" rel="stylesheet">-->
     <link href="{{ URL::asset('plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('plugins/toastr/toastr.min.css') }}" rel="stylesheet">
+
 
 
     <!-- Custom styles for this template -->
@@ -42,18 +43,16 @@
 <div class="container-fluid" id="content">
     <div class="row">
         <!-- SIDEBAR ----------------------------------------------------------------------------------------------- -->
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div class="col-sm-3 col-md-2 sidebar no-print">
             <div id="sidemenu">
-                @include('templates.sidebar')
+                @include('templates.sidebar-main')
             </div>
         </div>
         <!-- BREADCRUMB -------------------------------------------------------------------------------------------- -->
-        <div class="col-lg-10 col-md-offset-2">
+        <div class="col-lg-10 col-md-offset-2 no-print">
             <div id="breadcrumb" class="row">
                 <ol class="breadcrumb">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Clientes</a></li>
-                    <li><a href="#">Novo</a></li>
                 </ol>
             </div>
         </div>
@@ -71,11 +70,22 @@
                 </div>
             </div>
             <div class="row">
-                <div id="dashboard_links" class="col-md-2 pull-right">
+                <div id="dashboard_links" class="col-md-2 pull-right no-print">
                     @yield('sidebar')
+                    <hr>
+                    @if($errors->has())
+                        <div id="erros" data-alert class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <ul>
+                                @foreach($errors->all() as $erro)
+                                    <li class="small">{!! $erro !!}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
 
-                <div id="dashboard_tabs" class="col-md-10">
+                <div id="dashboard_tabs" class="col-md-10 print">
                     <div class="panel panel-default">
                         <div class="panel-body">
 
@@ -95,6 +105,8 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="{{ URL::asset('plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ URL::asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ URL::asset('plugins/toastr/toastr.min.js') }}"></script>
+{!! Toastr::render() !!}
 
 <!--Load js for page-->
 <script src="{{ URL::asset('js/dashboard.js') }}"></script>

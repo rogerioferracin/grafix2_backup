@@ -146,6 +146,7 @@ return [
 		'Grafix\Providers\EventServiceProvider',
 		'Grafix\Providers\RouteServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Kamaln7\Toastr\ToastrServiceProvider',
 
 	],
 
@@ -196,6 +197,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
         'Form'      => 'Illuminate\Html\FormFacade',
         'HTML'      => 'Illuminate\Html\HtmlFacade',
+        'Toastr'    => 'Kamaln7\Toastr\Facades\Toastr',
 
 	],
 

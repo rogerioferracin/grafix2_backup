@@ -6,26 +6,35 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
 	use Authenticatable, CanResetPassword;
 
 	//Relations ------------------------------------------------------------------------------
-	public function contatos()
+	public function contato()
 	{
-		return $this->morphOne('Contato', 'contato_morph');
+		return $this->morphOne('Grafix\Contato', 'contato_morph');
 	}
+
+    public function endereco()
+    {
+        return $this->morphOne('Grafix\Endereco', 'endereco_morph');
+    }
 
 	//Validação ------------------------------------------------------------------------------
 	public static $rules = array(
 		'username' => 'required',
 		'email' => 'required|email',
-		'password' => 'required|confirmed'
+		'grupo' => 'required',
+		'password' => 'sometimes|required|confirmed'
 	);
 
     public static $messages = array(
+        'username.required' => 'O campo <b>nome de usuário</b> deve ser preenchido',
         'password.required' => 'O campo <b>senha</b> deve ser preenchido',
-        'password.confirmed' => 'O <b>confirma senha</b> não coincide.'
+        'password.confirmed' => 'O <b>confirma senha</b> não coincide.',
+        'grupo.required' => 'O <b>grupo</b> deve ser selecionado.'
     );
 
 	/**
@@ -40,7 +49,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['username', 'email', 'password'];
+	protected $fillable = ['username', 'email', 'password', 'dica_senha', 'grupo'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -48,5 +57,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+
+    /** ***************************************************************************************************************
+     * Mutators
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = \Hash::make($value);
+    }
+
+
+    /** ***************************************************************************************************************
+     * Valida Usuario
+     */
+    public static function validaUsuario($input) {
+        $validator = \Validator::make($input, User::$rules, User::$messages);
+
+        return $validator;
+    }
 
 }

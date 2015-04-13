@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div id="logo" class="col-xs-12 col-md-2">
-            <a href="#"><img src="{!! URL::asset('img/grafix-logo-50.png') !!}"> Grafix <sup>v0.0.2</sup></a>
+            <a href="{!! URL::to('/') !!}"><img src="{!! URL::asset('img/grafix-logo-50.png') !!}"> Grafix <sup>v0.0.2</sup></a>
         </div>
         <div id="top-panel" class="col-xs-12 col-md-10">
             <div class="row">
@@ -21,11 +21,11 @@
                                 <i class="fa fa-angle-down pull-right"></i>
                                 <div class="user-mini pull-right">
                                     <span class="welcome">Bem vindo,</span>
-                                    <span>Administrador</span>
+                                    <span>{!! Auth::user()->contato->nome !!}</span>
                                 </div>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">
+                                <li><a href="{!! url('auth/logout') !!}">
                                         <i class="fa fa-power-off"></i> <span>Logout</span></a>
                                 </li>
                             </ul>

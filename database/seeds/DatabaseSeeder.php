@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use database\seeds\GruposTableSeeder;
+use Grafix\database\seedsUsersTableSeeder;
+
 
 class DatabaseSeeder extends Seeder {
 
@@ -14,7 +17,8 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		// $this->call('UserTableSeeder');
+		 $this->call('GruposTableSeeder');
+//		 $this->call('UsersTableSeeder');
 	}
 
 }
