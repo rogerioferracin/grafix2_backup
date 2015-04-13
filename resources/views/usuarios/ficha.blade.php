@@ -101,14 +101,30 @@
             </tr>
         </tbody>
     </table>
+
+
+
 @stop
 
 @section('sidebar')
     @include('usuarios.sidebar')
+
+    <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#" class="tab-link  tab-link-title" id="overview"><span class="h4">Usuário</span></a></li>
+        <li>
+            <a href="#" class="tab-link" id="btn-troca-senha">
+                <i class="fa fa-lock"></i> Troca senha
+            </a>
+        </li>
+    </ul>
 @stop
 
 @section('scripts')
     <script>
-
+        $(document).ready(function(){
+            $('#btn-troca-senha').click(function(e){
+                MakeTrocaSenhaModal({!! $user->id !!});
+            })
+        });
     </script>
 @stop

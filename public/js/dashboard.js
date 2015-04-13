@@ -2,8 +2,103 @@
  * Function for to use on app and Plugins from thirdparty
  */
 
+
 /**
- * Load Bootbox
+ * Troca senha de usuário
+ */
+function MakeTrocaSenhaModal(userId, token_id)
+{
+    $.getScript('/plugins/bootbox/bootbox.min.js').done(function(script){
+        var fieldData = '';
+        bootbox.setDefaults({
+            locale  : 'br',
+            size : 'small',
+            buttons: {
+                success : {
+                    label : 'Cancela',
+                    className : 'btn-default'
+                },
+                primary : {
+                    label : 'OK',
+                    className: 'btn-primary',
+                    callback : function() {
+                        var senha_atual = $('input[name="senha-atual"]').val();
+                        var nova_senha = $('input[name="nova-senha"]').val();
+                        var confirma_senha = $('input[name="confirma-nova-senha"]').val();
+
+                        if(senha_atual === '' || nova_senha === '' || confirma_senha === '') {
+                            alert('Todos os campos devem ser preenchidos!');
+                            return false;
+                        }
+
+                        if(senha_atual === nova_senha) {
+                            alert('A senha atual e nova senha não podem ser mesma!');
+                            return false;
+                        }
+
+                        if(nova_senha != confirma_senha) {
+                            alert('Nova senha e confirma nova senha devem ser identicas!');
+                            return false;
+                        }
+
+                        var formData = {
+                            'senha_atual' : senha_atual,
+                            'nova_senha' : nova_senha
+                        }
+
+                        $.ajaxSetup({
+                            headers : {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax('/usuarios/altera-senha/' + userId, {
+                            method : 'put',
+                            data : formData
+                        }).done(function(result) {
+                            if(result.success) {
+                                alert(result.mensagem);
+                                window.location.assign('/auth/logout');
+                            }
+                            if(result.fail) {
+                                alert(result.mensagem);
+                            }
+                        })
+
+                    }
+                }
+            }
+        });
+
+        var modal = bootbox.dialog({
+            title : 'Troca senha',
+            message :
+            '<div class="row">  ' +
+                '<div class="col-md-12"> ' +
+                    '<form class="form-horizontal" id="form-troca-senha"> ' +
+                        '<div class="form-group"> ' +
+                            '<div class="col-md-12"> ' +
+                                '<input name="senha-atual" type="text" placeholder="Senha atual" class="form-control" required> ' +
+                            '</div> ' +
+                        '</div> ' +
+                        '<div class="form-group"> ' +
+                            '<div class="col-md-12"> ' +
+                                '<input name="nova-senha" type="text" placeholder="Nova senha" class="form-control" required> ' +
+                            '</div> ' +
+                        '</div> ' +
+                        '<div class="form-group"> ' +
+                            '<div class="col-md-12"> ' +
+                                '<input name="confirma-nova-senha" type="text" placeholder="Confirma nova senha" class="form-control" required> ' +
+                            '</div> ' +
+                        '</div> ' +
+                    '</form> ' +
+                '</div>' +
+            '</div> '
+        });
+    });
+}
+
+/**
+ * Busca endereco
  */
 function MakeSearchAddressModal() {
 

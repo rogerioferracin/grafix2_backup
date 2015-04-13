@@ -4,6 +4,8 @@ use Grafix\User;
 use Grafix\Contato;
 use Grafix\Endereco;
 
+use Illuminate\Http\Request;
+
 class UsersController extends Controller
 {
 
@@ -182,6 +184,48 @@ class UsersController extends Controller
             return redirect('usuarios');
         }
         return view('usuarios.ficha', array('user' => $user, 'page_title'=>'Ficha de usuário nº ' . $user->id));
+    }
+
+    /**
+     * ALtera senha de usuário
+     * @param $id id do usuário
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function putAlteraSenha($id)
+    {
+
+        $user = User::find($id);
+
+        if(!$user) {
+            $response = array(
+                'fail'   => true,
+                'mensagem'  => 'Usuário não encontrado. Tente novamente!'
+            );
+        } else {
+
+            if(!\Hash::check(\Input::get('senha_atual'), $user->password)) {
+                $response = array(
+                    'fail'   => true,
+                    'mensagem'  => 'Senha atual não coincide. Tente novamente!'
+                );
+            } else {
+
+                $user->password = \Input::get('nova_senha');
+
+                \DB::transaction(function() use ($user) {
+                    $user->save();
+                });
+
+                $response = array(
+                    'success'   => true,
+                    'mensagem'  => 'Senha alterada com sucesso. Você será deslogado para logar com a nova senha!'
+                );
+            }
+        }
+
+
+
+        return \Response::json($response);
     }
 
 }

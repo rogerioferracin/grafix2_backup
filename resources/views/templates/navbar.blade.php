@@ -25,6 +25,9 @@
                                 </div>
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a href="{!! url('usuarios/ficha', array('id'=>Auth::user()->id)) !!}">
+                                        <i class="fa fa-user"></i> <span>Perfil</span></a>
+                                </li>
                                 <li><a href="{!! url('auth/logout') !!}">
                                         <i class="fa fa-power-off"></i> <span>Logout</span></a>
                                 </li>
