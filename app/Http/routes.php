@@ -22,4 +22,5 @@ Route::controllers([
 ]);
 
 Route::controller('usuarios', 'UsersController');
+Route::controller('clientes', 'ClientesController');
 Route::controller('enderecos', 'EnderecosController');

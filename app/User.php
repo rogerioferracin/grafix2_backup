@@ -14,12 +14,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	//Relations ------------------------------------------------------------------------------
 	public function contato()
 	{
-		return $this->morphOne('Grafix\Contato', 'contato_morph');
+		return $this->morphOne('Grafix\Models\Contato', 'contato_morph');
 	}
 
     public function endereco()
     {
-        return $this->morphOne('Grafix\Endereco', 'endereco_morph');
+        return $this->morphOne('Grafix\Models\Endereco', 'endereco_morph');
     }
 
 	//Validação ------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /** ***************************************************************************************************************
      * Valida Usuario
      */
-    public static function validaUsuario($input) {
+    public static function validar($input) {
         $validator = \Validator::make($input, User::$rules, User::$messages);
 
         return $validator;

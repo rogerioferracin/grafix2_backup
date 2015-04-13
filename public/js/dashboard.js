@@ -264,12 +264,26 @@ function MakeBreadCrumbs(){
     })
 }
 
+function MakeErrorBadgeOnPanel()
+{
+    var panels = $('.panel-group').find('.panel-body');
+    $(panels).each(function(){
+        var errors = $(this).find('.text-danger');
+        if(errors.length > 0) {
+            $(errors).closest('.panel-body').parent().siblings().append('<span class="badge">' + errors.length + '</div>');
+        }
+    });
+}
+
 /** *******************************************************************************************************************
  * Document ready load
  */
 $(document).ready(function(){
     //breadcrumb ----------------------------------------
     MakeBreadCrumbs();
+
+    //error badges ----------------------------------------
+    MakeErrorBadgeOnPanel();
 
     //tooltip ----------------------------------------
     $('#btn-busca-endereco').click(function(){

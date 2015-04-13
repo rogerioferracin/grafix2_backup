@@ -1,6 +1,6 @@
 <?php namespace Grafix\Http\Controllers;
 
-use Grafix\Contato;
+use Grafix\Models\Contato;
 
 class ContatosController extends Controller
 {

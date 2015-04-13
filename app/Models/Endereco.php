@@ -1,4 +1,4 @@
-<?php namespace Grafix;
+<?php namespace Grafix\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +24,7 @@ class Endereco extends Model {
     /** ***************************************************************************************************************
      * Valida Endereco
      */
-    public static function validaEndereco($input)
+    public static function validar($input)
     {
         $validator = \Validator::make($input, Endereco::$rules);
         return $validator;

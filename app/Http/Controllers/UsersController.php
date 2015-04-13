@@ -1,10 +1,8 @@
 <?php namespace Grafix\Http\Controllers;
 
 use Grafix\User;
-use Grafix\Contato;
-use Grafix\Endereco;
-
-use Illuminate\Http\Request;
+use Grafix\Models\Contato;
+use Grafix\Models\Endereco;
 
 class UsersController extends Controller
 {
@@ -50,9 +48,9 @@ class UsersController extends Controller
      */
     public function postNovo()
     {
-        $validaUser = User::validaUsuario(\Input::all());
-        $validaContato = Contato::validaContato(\Input::all());
-        $validaEndereco = Endereco::validaEndereco(\Input::all());
+        $validaUser = User::validar(\Input::all());
+        $validaContato = Contato::validar(\Input::all());
+        $validaEndereco = Endereco::validar(\Input::all());
 
         if($validaUser->fails() || $validaEndereco->fails() || $validaContato->fails()){
             \Toastr::warning('Ocorreu uma falha ao validar o cadastro!', 'Atenção');
@@ -96,7 +94,8 @@ class UsersController extends Controller
             \DB::rollback();
 
             //redireciona para pagina
-            return \Redirect::back();
+            \Toastr::error('Ocorreu um erro ao salvar a entidade', 'Erro');
+            return \Redirect::to('usuarios');
         }
 
     }
@@ -166,7 +165,8 @@ class UsersController extends Controller
             \DB::rollback();
 
             //redireciona para pagina
-            return \Redirect::back();
+            \Toastr::error('Ocorreu um erro ao salvar a entidade', 'Erro');
+            return \Redirect::to('usuarios');
         }
     }
 

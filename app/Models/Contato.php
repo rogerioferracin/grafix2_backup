@@ -1,6 +1,7 @@
-<?php namespace Grafix;
+<?php namespace Grafix\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contato extends Model {
 
@@ -20,7 +21,7 @@ class Contato extends Model {
     protected $table = 'contatos';
 
     //Softdelete -----------------------------------------------------------------------------
-    use \Illuminate\Database\Eloquent\SoftDeletes;
+    use SoftDeletes;
     protected $dates = ['deleted_at'];
 
     //Fillable -------------------------------------------------------------------------------
@@ -31,10 +32,32 @@ class Contato extends Model {
     /** ***************************************************************************************************************
      * Valida contato
      */
-    public static function validaContato($input)
+    public static function validar($input)
     {
         $validator = \Validator::make($input, Contato::$rules);
         return $validator;
+    }
+
+    /**
+     * MUTATORS
+     */
+    public function setAniversarioAttribute($value)
+    {
+        if($value) {
+            $date = \DateTime::createFromFormat('d/m/Y', $value)->getTimestamp();
+            $this->attributes['aniversario'] = date('Y-m-d', $date);
+        } else {
+            $this->attributes['aniversario'] = '';
+        }
+    }
+
+    public function getAniversarioAttribute()
+    {
+        if($this->attributes['aniversario'] == '0000-00-00') {
+            return '';
+        } else {
+            return date('d/m/Y', strtotime($this->attributes['aniversario']));
+        }
     }
 
 }
