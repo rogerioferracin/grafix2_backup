@@ -2,8 +2,65 @@
  * Function for to use on app and Plugins from thirdparty
  */
 
+
 /**
- * Load Bootbox
+ * Troca senha de usuário
+ */
+function MakeTrocaSenhaModal()
+{
+    $.getScript('/plugins/bootbox/bootbox.min.js').done(function(script){
+        var fieldData = '';
+        bootbox.setDefaults({
+            locale  : 'br',
+            size : 'small',
+            buttons: {
+                success : {
+                    label : 'Cancela',
+                    className : 'btn-default'
+                },
+                primary : {
+                    label : 'OK',
+                    className: 'btn-primary',
+                    callback : function() {
+                        var posting = $.post('usuarios/troca-senha', function(){
+
+                        });
+
+                    }
+                }
+            }
+        });
+
+        var modal = bootbox.dialog({
+            title : 'Troca senha',
+            message :
+            '<div class="row">  ' +
+                '<div class="col-md-12"> ' +
+                    '<form class="form-horizontal" id="form-troca-senha"> ' +
+                        '<div class="form-group"> ' +
+                            '<div class="col-md-12"> ' +
+                                '<input name="senha-atual" type="text" placeholder="Senha atual" class="form-control"> ' +
+                            '</div> ' +
+                        '</div> ' +
+                        '<div class="form-group"> ' +
+                            '<div class="col-md-12"> ' +
+                                '<input name="nova-senha" type="text" placeholder="Nova senha" class="form-control"> ' +
+                            '</div> ' +
+                        '</div> ' +
+                        '<div class="form-group"> ' +
+                            '<div class="col-md-12"> ' +
+                                '<input name="confirma-nova-senha" type="text" placeholder="Confirma nova senha" class="form-control"> ' +
+                            '</div> ' +
+                        '</div> ' +
+                    '</form> ' +
+                '</div>' +
+            '</div> '
+        });
+    });
+}
+
+/**
+ * Busca endereco
  */
 function MakeSearchAddressModal() {
 
