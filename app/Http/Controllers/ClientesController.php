@@ -42,8 +42,6 @@ class ClientesController extends Controller
      */
     public function postNovo()
     {
-
-        //TODO validar CPF e CNPJ
         $validaCliente = Cliente::validar(\Input::all());
         $validaContato = Contato::validar(\Input::all());
         $validaEndereco = Endereco::validar(\Input::all());
@@ -59,10 +57,10 @@ class ClientesController extends Controller
                 ))->withInput();
         }
 
+
         //Cria novas entidades e preenche os atributos
         $cliente = new Cliente();
         $cliente->fill(\Input::all());
-//        dd($cliente->toArray());
         $contato = new Contato();
         $contato->fill(\Input::all());
         $contato->contato_principal = 1;
@@ -77,6 +75,81 @@ class ClientesController extends Controller
             $cliente->save();
             $cliente->contato()->save($contato);
             $cliente->endereco()->save($endereco);
+
+            \DB::commit();
+
+            \Toastr::info('Cliente ' . $cliente->nome_fantasia . ' gravado com sucesso', 'Sucesso');
+            return \Redirect::to('clientes');
+
+        } catch(\Exception $e) {
+            //lança erro no log
+            \Log::alert('Ocorreu um erro ao salvar a entidade: ['
+                . $e->getCode() . '] ->  ' . $e->getMessage());
+
+            //efetua roolback na transaction
+            \DB::rollback();
+
+            //redireciona para pagina
+            \Toastr::error('Ocorreu um erro ao salvar a entidade', 'Erro');
+            return \Redirect::to('clientes');
+        }
+    }
+
+    /**
+     * Exibe form para atualizar Cliente
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function getAtualiza($id)
+    {
+        $cliente = Cliente::find($id);
+
+        if(!$cliente) {
+            \Toastr::warning('Cliente não encontrado. Tente novamente', 'Atenção');
+            return redirect('clientes');
+        }
+
+        return view('clientes.atualiza', array('page_title'=>'Atualiza cliente', 'model'=>$cliente));
+    }
+
+    /**
+     * Atualiza cliente no BD
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function putAtualiza($id)
+    {
+
+
+        $validaCliente = Cliente::validar(\Input::all(), $id);
+        $validaContato = Contato::validar(\Input::all());
+        $validaEndereco = Endereco::validar(\Input::all());
+
+        if($validaCliente->fails() || $validaContato->fails() || $validaEndereco->fails())
+        {
+            \Toastr::warning('Ocorreu uma falha ao validar o cadastro!', 'Atenção');
+            return back()
+                ->withErrors(array_merge_recursive(
+                    $validaCliente->messages()->toArray(),
+                    $validaContato->messages()->toArray(),
+                    $validaEndereco->messages()->toArray()
+                ))->withInput();
+        }
+
+        //Cria novas entidades e preenche os atributos
+//        $cliente = Cliente::with(['endereco', 'contato'])->find($id);
+        $cliente = Cliente::find($id);
+//        dd($cliente);
+        $cliente->fill(\Input::all());
+        $cliente->contatoPrincipal->fill(\Input::all());
+        $cliente->endereco->fill(\Input::all());
+
+        //Abre a transaction
+        \DB::beginTransaction();
+
+        try {
+
+            $cliente->push();
 
             \DB::commit();
 

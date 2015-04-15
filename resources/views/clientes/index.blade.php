@@ -22,7 +22,7 @@
                     </td>
                     <td>{!! $cliente->contatoPrincipal->telefone !!}</td>
                     <td>{!! $cliente->contatoPrincipal->email !!}</td>
-                    <td><a href="#"><i class="fa fa-folder-open"></i> </a> </td>
+                    <td><a href="{!! url('clientes/atualiza', ['id'=>$cliente->id]) !!}"><i class="fa fa-folder-open"></i> </a> </td>
                 </tr>
             @endforeach
         </tbody>

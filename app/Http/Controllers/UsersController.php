@@ -1,8 +1,6 @@
 <?php namespace Grafix\Http\Controllers;
 
 use Grafix\User;
-use Grafix\Models\Contato;
-use Grafix\Models\Endereco;
 
 class UsersController extends Controller
 {
@@ -49,27 +47,17 @@ class UsersController extends Controller
     public function postNovo()
     {
         $validaUser = User::validar(\Input::all());
-        $validaContato = Contato::validar(\Input::all());
-        $validaEndereco = Endereco::validar(\Input::all());
 
-        if($validaUser->fails() || $validaEndereco->fails() || $validaContato->fails()){
+        if($validaUser->fails()){
             \Toastr::warning('Ocorreu uma falha ao validar o cadastro!', 'Atenção');
             return \Redirect::back()
-                ->withErrors(array_merge_recursive(
-                    $validaUser->messages()->toArray(),
-                    $validaContato->messages()->toArray(),
-                    $validaEndereco->messages()->toArray()
-                ))
+                ->withErrors($validaUser)
                 ->withInput();
         }
 
         //Cria novas entidades e preenche os atributos
         $user = new User();
         $user->fill(\Input::all());
-        $contato = new Contato();
-        $contato->fill(\Input::all());
-        $endereco = new Endereco();
-        $endereco->fill(\Input::all());
 
         //Abre a transaction
         \DB::beginTransaction();
@@ -77,8 +65,6 @@ class UsersController extends Controller
         try {
 
             $user->save();
-            $user->contato()->save($contato);
-            $user->endereco()->save($endereco);
 
             \DB::commit();
 
@@ -107,14 +93,14 @@ class UsersController extends Controller
      */
     public function getAtualiza($id)
     {
-        $user = User::find($id);
+        $model = User::find($id);
 
-        if(!$user) {
+        if(!$model) {
             \Toastr::info('Usuário não encontrado, tente novamente', 'Atualiza usuário');
             return redirect('usuarios');
         }
 
-        return view('usuarios.atualiza', ['user'=>$user, 'page_title'=>'Atualiza usuário: ' . $user->contato->nome]);
+        return view('usuarios.atualiza', ['model'=>$model, 'page_title'=>'Atualiza usuário: ' . $model->nome]);
     }
 
     /**
@@ -123,26 +109,20 @@ class UsersController extends Controller
      */
     public function putAtualiza($id)
     {
-        $validaUser = User::validaUsuario(\Input::all());
-        $validaContato = Contato::validaContato(\Input::all());
-        $validaEndereco = Endereco::validaEndereco(\Input::all());
 
-        if($validaUser->fails() || $validaEndereco->fails() || $validaContato->fails()){
+        $validaUser = User::validar(\Input::all(), $id);
+
+        if($validaUser->fails()){
             \Toastr::warning('Ocorreu uma falha ao validar o cadastro!', 'Atenção');
             return \Redirect::back()
-                ->withErrors(array_merge_recursive(
-                    $validaUser->messages()->toArray(),
-                    $validaContato->messages()->toArray(),
-                    $validaEndereco->messages()->toArray()
-                ))
+                ->withErrors($validaUser)
                 ->withInput();
         }
 
         //Cria novas entidades e preenche os atributos
         $user = User::find($id);
+        dd($user);
         $user->fill(\Input::all());
-        $user->contato->fill(\Input::all());
-        $user->endereco->fill(\Input::all());
 
         //Abre a transaction
         \DB::beginTransaction();
@@ -153,7 +133,7 @@ class UsersController extends Controller
 
             \DB::commit();
 
-            \Toastr::info('Usuário ' . $user->contato->nome . ' gravado com sucesso', 'Sucesso');
+            \Toastr::info('Usuário ' . $user->nome . ' gravado com sucesso', 'Sucesso');
             return \Redirect::to('usuarios');
 
         } catch(\Exception $e) {

@@ -11,27 +11,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	use Authenticatable, CanResetPassword;
 
-	//Relations ------------------------------------------------------------------------------
-	public function contato()
-	{
-		return $this->morphOne('Grafix\Models\Contato', 'contato_morph');
-	}
-
-    public function endereco()
-    {
-        return $this->morphOne('Grafix\Models\Endereco', 'endereco_morph');
-    }
-
 	//Validação ------------------------------------------------------------------------------
-	public static $rules = array(
-		'username' => 'required',
-		'email' => 'required|email',
-		'grupo' => 'required',
-		'password' => 'sometimes|required|confirmed'
-	);
+	public static function rules($id){
+        return array(
+                'username' => 'required|unique:users,username' . ($id ? ",$id" : ''),
+                'email' => 'required|email',
+                'grupo' => 'required',
+                'password' => 'sometimes|required|confirmed'
+            );
+    }
 
     public static $messages = array(
         'username.required' => 'O campo <b>nome de usuário</b> deve ser preenchido',
+        'username.unique' => 'O <b>nome de usuário</b> já existe. Tente novamente.',
         'password.required' => 'O campo <b>senha</b> deve ser preenchido',
         'password.confirmed' => 'O <b>confirma senha</b> não coincide.',
         'grupo.required' => 'O <b>grupo</b> deve ser selecionado.'
@@ -70,8 +62,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /** ***************************************************************************************************************
      * Valida Usuario
      */
-    public static function validar($input) {
-        $validator = \Validator::make($input, User::$rules, User::$messages);
+    public static function validar($input, $id = null) {
+        $validator = \Validator::make($input, User::rules($id), User::$messages);
 
         return $validator;
     }

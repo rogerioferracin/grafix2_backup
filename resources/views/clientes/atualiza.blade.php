@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('content')
-    {!! Form::open(array('url'=>'clientes/novo', 'class'=>'form-horizontal')) !!}
+    {!! Form::model($model, array('url'=>['clientes/atualiza', 'id'=>$model->id], 'class'=>'form-horizontal', 'method'=>'put')) !!}
     <div class="panel-group" id="accordion">
         {{--PANEL DADOS ------------------------------------------------------- --}}
         <div class="panel panel-info">
@@ -25,7 +25,7 @@
             </div>
             <div class="panel-collapse collapse" id="contato">
                 <div class="panel-body">
-                    @include('templates.partials.contato_form')
+                    @include('templates.partials.contato_update_form')
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             </div>
             <div class="panel-collapse collapse" id="endereco">
                 <div class="panel-body">
-                    @include('templates.partials.endereco_form')
+                    @include('templates.partials.endereco_update_form')
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
     </div>
     {{--BUTTON--}}
     <div class="col-md-12 clearfix">
-        {!! Form::submit('Cadastrar', array('class'=>'btn btn-primary pull-right submit-confirm')) !!}
+        {!! Form::submit('Atualizar', array('class'=>'btn btn-primary pull-right submit-confirm')) !!}
     </div>
     {!! Form::close() !!}
 @stop
@@ -58,7 +58,9 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
-
+            $('input[name="cnpj_cpf"]').on('blur', function(){
+                MakeMaskedCnpjCpf($(this));
+            })
         })
     </script>
 @stop

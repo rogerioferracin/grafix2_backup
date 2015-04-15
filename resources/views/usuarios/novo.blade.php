@@ -4,7 +4,7 @@
     {!! Form::open(array('url'=>'usuarios/novo', 'class'=>'form-horizontal')) !!}
     <div class="panel-group" id="accordion">
         {{--PANEL DADOS ------------------------------------------------------- --}}
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <a href="#dados" data-toggle="collapse" data-parent="#accordion">
                     <span class="panel-title">Dados de acesso</span>
@@ -12,6 +12,13 @@
             </div>
             <div class="panel-collapse collapse in" id="dados">
                 <div class="panel-body">
+                    <div class="form-group">
+                        {!! Form::label('nome', 'Nome*', array('class'=>'col-md-2 control-label')) !!}
+                        <div class="col-md-10">
+                            {!! Form::text('nome', null, array('class'=>'form-control')) !!}
+                            @if($errors->has('nome')) <span class="text-danger small"> {!! $errors->first('nome') !!} </span> @endif
+                        </div>
+                    </div>
                     <div class="form-group">
                         {!! Form::label('username', 'Usuário*', array('class'=>'col-md-2 control-label')) !!}
                         <div class="col-md-4">
@@ -49,79 +56,6 @@
                             @if($errors->has('password_confirmation')) <span class="text-danger small"> {!! $errors->first('password_confirmation') !!} </span> @endif
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        {{--PANEL CONTATO ------------------------------------------------------- --}}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <a href="#contato" data-toggle="collapse" data-parent="#accordion">
-                    <span class="panel-title">Contato</span>
-                </a>
-            </div>
-            <div class="panel-collapse collapse" id="contato">
-                <div class="panel-body">
-                    <div class="form-group">
-                        {!! Form::label('nome', 'Nome*', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            {!! Form::text('nome', null, array('class'=>'form-control')) !!}
-                            @if($errors->has('nome')) <span class="text-danger small"> {!! $errors->first('nome') !!} </span> @endif
-                        </div>
-                        {!! Form::label('sobrenome', 'Sobrenome', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            {!! Form::text('sobrenome', null, array('class'=>'form-control')) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('cargo', 'Cargo', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            {!! Form::text('cargo', null, array('class'=>'form-control')) !!}
-                        </div>
-                        {!! Form::label('setor', 'Setor', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            {!! Form::text('setor', null, array('class'=>'form-control')) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('telefone', 'Telefone*', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            {!! Form::text('telefone', null, array('class'=>'form-control')) !!}
-                            @if($errors->has('telefone')) <span class="text-danger small"> {!! $errors->first('telefone') !!} </span> @endif
-                        </div>
-                        {!! Form::label('celular', 'Celular', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            {!! Form::text('celular', null, array('class'=>'form-control')) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('skype', 'Skype', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            {!! Form::text('skype', null, array('class'=>'form-control')) !!}
-                        </div>
-                        {!! Form::label('aniversario', 'Aniversário', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-4">
-                            {!! Form::text('aniversario', null, array('class'=>'form-control')) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('observacoes', 'Observações', array('class'=>'col-md-2 control-label')) !!}
-                        <div class="col-md-10">
-                            {!! Form::textarea('observacoes', null, array('class'=>'form-control', 'rows'=>'3')) !!}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{--PANEL ENDERECO ------------------------------------------------------- --}}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <a href="#endereco" data-toggle="collapse" data-parent="#accordion">
-                    <span class="panel-title">Endereço</span> <span class="badge-errors"></span>
-                </a>
-            </div>
-            <div class="panel-collapse collapse" id="endereco">
-                <div class="panel-body">
-                    @include('templates.endereco_form')
                 </div>
             </div>
         </div>

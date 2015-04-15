@@ -264,6 +264,10 @@ function MakeBreadCrumbs(){
     })
 }
 
+/**
+ * Insere badges com qtde de erros nos panels do form
+ * @constructor
+ */
 function MakeErrorBadgeOnPanel()
 {
     var panels = $('.panel-group').find('.panel-body');
@@ -275,6 +279,50 @@ function MakeErrorBadgeOnPanel()
     });
 }
 
+/**
+ * Mascara campo com CNPJ ou CPF
+ * @param field
+ * @constructor
+ */
+function MakeMaskedCnpjCpf(field)
+{
+    var text = $(field).val().replace(/[^0-9]/gi, '');
+
+    switch (text.length) {
+        case 11 :
+            var value = text.substring(0,3) + '.' + text.substring(3,6) + '.' + text.substring(6,9) + '.' + text.substring(9);
+            $(field).val(value);
+            break;
+        case 14 :
+            var value = text.substring(0,2)
+                + '.' + text.substring(2,5)
+                + '.' + text.substring(5,8)
+                + '/' + text.substring(8,12)
+                + '-' + text.substring(12);
+            $(field).val(value);
+            break;
+    }
+
+}
+
+function MakeDateTimePicker(field, type)
+{
+    $.getScript('/plugins/moment/moment-with-locales.min.js', function(){
+        $.getScript('/plugins/bsdatetimepicker/bootstrap-datetimepicker.min.js', function(){
+            if(type === 'date') {
+                type = 'DD/MM/YYYY';
+            } else {
+                type = 'DD/MM/YYYY HH:MM'
+            }
+
+            $(field).datetimepicker({
+                locale : 'pt-BR',
+                format : type
+            });
+        })
+    })
+}
+
 /** *******************************************************************************************************************
  * Document ready load
  */
@@ -284,6 +332,10 @@ $(document).ready(function(){
 
     //error badges ----------------------------------------
     MakeErrorBadgeOnPanel();
+
+    //date picker ----------------------------------------
+    //$('.date').datetimepicker();
+
 
     //tooltip ----------------------------------------
     $('#btn-busca-endereco').click(function(){

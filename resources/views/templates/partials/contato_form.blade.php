@@ -44,10 +44,12 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group has-feedback">
     {!! Form::label('aniversario', 'Aniversário', array('class'=>'col-md-2 control-label')) !!}
     <div class="col-md-4">
-        {!! Form::text('aniversario', null, array('class'=>'form-control')) !!}
+        {!! Form::text('aniversario', null, array('class'=>'form-control date')) !!}
+        <span class="fa fa-calendar form-control-feedback"></span>
+
     </div>
     {!! Form::label('lembrar_anivsersario', 'Lembrar?', array('class'=>'col-md-2 control-label')) !!}
     <div class="col-md-4">
@@ -63,3 +65,9 @@
         {!! Form::textarea('observacoes', null, array('class'=>'form-control', 'rows'=>'3')) !!}
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        MakeDateTimePicker('.date', 'date');
+    });
+</script>

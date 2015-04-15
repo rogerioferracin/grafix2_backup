@@ -7,7 +7,6 @@
                 <th>Nome</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Telefone</th>
                 <th>Grupo</th>
                 <th><i class="fa fa-edit" data-toggle="tooltip" title="Opções para usuário"></i> </th>
             </tr>
@@ -15,10 +14,9 @@
         <tbody>
             @foreach($users as $user)
             <tr>
-                <td>{{ $user->contato->nome }}</td>
+                <td>{{ $user->nome }}</td>
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->contato->telefone }}</td>
                 <td>{{ $user->grupo }}</td>
                 <td>
                     <a href="{!! url('usuarios/atualiza', ['id'=>$user->id]) !!}"><i class="fa fa-folder-open" data-toggle="tooltip" title="Atualiza usuário"></i> </a> |

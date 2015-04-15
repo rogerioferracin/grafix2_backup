@@ -4,7 +4,7 @@
 .env
 .idea
 .gitignore
-.idea/dataSources.ids
+**/.idea/dataSources.ids
 .idea/dataSources.xml
 .idea/workspace.xml
 **/.idea/workspace.xml

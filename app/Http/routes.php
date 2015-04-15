@@ -1,5 +1,6 @@
 <?php
 
+use Grafix\Services\Validation;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -24,3 +25,7 @@ Route::controllers([
 Route::controller('usuarios', 'UsersController');
 Route::controller('clientes', 'ClientesController');
 Route::controller('enderecos', 'EnderecosController');
+
+Validator::resolver(function($translator, $data, $rules, $messages){
+    return new Validation($translator, $data, $rules, $messages);
+});

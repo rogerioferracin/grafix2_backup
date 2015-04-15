@@ -10,6 +10,15 @@ body {
     background:#436E90;
 }
 
+.has-feedback .form-control-feedback {
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    background-color: #eeeeee;
+    border: 1px solid #cccccc;
+    border-radius: 0  4px 4px 0;
+}
+
 /**
 * DASHBOARD
 */
@@ -636,4 +645,57 @@ body {
         page-break-after: avoid;
         height: 1px;
     }
+}
+
+/**
+* DATEPICKER
+*/
+#ui-datepicker-div {
+    background: rgba(0, 0, 0, 0.7) !important;
+    border:0;
+}
+#ui-datepicker-div .ui-widget-header {
+    background: rgba(0, 0, 0, 0.2);
+    border: 0;
+    border-bottom: 1px solid #686868;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    color: #f8f8f8;
+    padding: 1px 0;
+}
+#ui-datepicker-div.ui-widget-content {
+    color:#f8f8f8 !important;
+}
+#ui-datepicker-div .ui-state-default, #ui-datepicker-div .ui-widget-content .ui-state-default, #ui-datepicker-div .ui-widget-header .ui-state-default {
+    background: none;
+    border:0;
+    color:#f8f8f8;
+    text-align: center;
+}
+#ui-datepicker-div .ui-state-hover, #ui-datepicker-div.ui-widget-content .ui-state-hover, #ui-datepicker-div .ui-widget-header .ui-state-hover, #ui-datepicker-div .ui-state-focus, #ui-datepicker-div.ui-widget-content .ui-state-focus, #ui-datepicker-div .ui-widget-header .ui-state-focus,
+#ui-datepicker-div .ui-state-highlight, #ui-datepicker-div.ui-widget-content .ui-state-highlight, #ui-datepicker-div .ui-widget-header .ui-state-highlight {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border:0;
+    top:2px;
+}
+#ui-datepicker-div .ui-datepicker-group {
+    border-left: 1px solid #686868;
+}
+#ui-datepicker-div .ui-datepicker-group:first-child {
+    border-left:0;
+}
+#ui-datepicker-div .ui-datepicker-buttonpane {
+    margin: 0;
+}
+#ui-datepicker-div .ui-datepicker-group table {
+    margin:0 auto !important;
+}
+.ui-datepicker .ui-datepicker-prev {
+    left: 2px !important;
+    cursor: pointer;
+}
+.ui-datepicker .ui-datepicker-next {
+    right: 2px !important;
+    cursor: pointer;
 }

@@ -18,6 +18,8 @@
     <link href="{{ URL::asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
     <!--Plugins css-->
+    <link href="{{ URL::asset('plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('plugins/bsdatetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 
@@ -27,6 +29,10 @@
     <link href="{{ URL::asset('css/dashboard.css') }}" rel="stylesheet">
 
     <link href='http://fonts.googleapis.com/css?family=Muli:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ URL::asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -103,8 +109,8 @@
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="{{ URL::asset('plugins/jquery/jquery.min.js') }}"></script>
+
+{{--<script src="{{ URL::asset('/plugins/bsdatetimepicker/bootstrap-datetimepicker.min.js') }}"></script>--}}
 <script src="{{ URL::asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ URL::asset('plugins/toastr/toastr.min.js') }}"></script>
 {!! Toastr::render() !!}
