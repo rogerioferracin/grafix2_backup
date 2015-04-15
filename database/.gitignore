@@ -2,7 +2,7 @@
 /node_modules
 *.sqlite
 .env
-.idea
+.idea/*
 .gitignore
 **/.idea/dataSources.ids
 .idea/dataSources.xml
