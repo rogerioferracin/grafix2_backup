@@ -1,4 +1,6 @@
 /vendor
 /node_modules
 .env
-.idea
+.idea/*
+.gitignore
+**/.idea/tasks.xml
