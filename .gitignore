@@ -4,3 +4,5 @@
 .idea/*
 .gitignore
 **/.idea/tasks.xml
+.idea/workspace.xml
+.idea/tasks.xml
